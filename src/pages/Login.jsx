@@ -22,10 +22,7 @@ const LoginPage = () => {
       {
         onSuccess: () => {
           setIsAuthenticate(true);
-
-          console.log("test")
           navigate("/dashboard");
-          
         },
         onError: (error) => {
           setError(error.message);

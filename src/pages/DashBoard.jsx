@@ -1,5 +1,5 @@
-function DashBoard({ children }) {
-  return <div>{children}</div>;
+function DashBoard() {
+  return <h1>DashBoard!!!</h1>;
 }
 
 export default DashBoard;

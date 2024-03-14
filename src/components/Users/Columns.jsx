@@ -1,6 +1,7 @@
 import { SketchOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Typography } from "antd";
+import { Avatar, Space, Typography } from "antd";
 import { dayConverter, formatCash } from "../../utils";
+import { NavLink } from "react-router-dom";
 
 
 export const columnsUsers= [
@@ -135,26 +136,26 @@ export const columnsUsers= [
         );
       },
     },
-    // {
-    //   key:"id",
-    //   dataIndex: "actions",
-    //   title: "Hành động",
-    //   fixed: "right",
-    //   width: 100,
-    //   render: (_, record) => {
-    //     return (
-    //       <Space size="middle">
-    //         <NavLink
-    //           className={
-    //             "text-red-500 hover:text-red-400 cursor-pointer font-semibold"
-    //           }
-    //           to={`/users/user-detail/${record.id}`}
-    //         >
-    //           Xem chi tiết
-    //         </NavLink>
+    {
+      key:"id",
+      dataIndex: "actions",
+      title: "Hành động",
+      fixed: "right",
+      width: 100,
+      render: (_, record) => {
+        return (
+          <Space size="middle">
+            <NavLink
+              className={
+                "text-red-500 hover:text-red-400 cursor-pointer font-semibold"
+              }
+              to={`/users/user-detail/${record.id}`}
+            >
+              Xem chi tiết
+            </NavLink>
           
-    //       </Space>
-    //     );
-    //   },
-    // },
+          </Space>
+        );
+      },
+    },
   ]

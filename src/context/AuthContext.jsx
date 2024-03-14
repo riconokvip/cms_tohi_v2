@@ -6,12 +6,15 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [isAuthenticate, setIsAuthenticate] = useState(false);
-  // const {jwt} = localStorage.getItem("user") ? JSON.parse(localStorage.getItem('user') || '{}') : null;
-  // console.log("jwwt",jwt)
+
+  console.log("isAuthenticate",isAuthenticate)
   const navigate = useNavigate();
-const auth=true
   useEffect(() => {
-    if (!isAuthenticate &&!auth ) {
+    if (localStorage.getItem("user")) {
+      setIsAuthenticate(true);
+      navigate("/dashboard");
+    }
+    if (!isAuthenticate) {
       navigate("/login");
     }
   }, [isAuthenticate, navigate]);
