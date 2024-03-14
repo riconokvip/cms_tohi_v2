@@ -1,26 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, matchRoutes, useLocation, useNavigate } from "react-router-dom";
 import { items } from "./SiderItems";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const AppLayout = () => {
+  const {  token: { colorBgContainer },} = theme.useToken();
   const [collapsed, setCollapsed] = useState(false);
+  const auth = localStorage.getItem("user") ? JSON.parse(localStorage.getItem('user') || '{}') : null;
 
-  const { isAuthenticate } = useAuth();
+  const navigate=useNavigate()
+  const onClick = (e) => {
+    navigate(`/${e?.key}`)
+  };
 
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  useEffect(()=>{
+    if(auth===null){
+      navigate('/login')
+    }
+  },[auth])
+  const location = useLocation();
+  const [
+    {
+      route: { path },
+    },
+  ] = matchRoutes([{ path: location.pathname }], location);
+  const route = `${path
+    .split("/")
+    .filter((a) => !!a)
+    .shift()}`;
+
+
   return (
     <Layout
       style={{
         minHeight: "100vh",
       }}
     >
-      {isAuthenticate && (
+      {auth!==null && (
         <Sider
           collapsible
           collapsed={collapsed}
@@ -28,8 +47,9 @@ const AppLayout = () => {
         >
           <div className="demo-logo-vertical" />
           <Menu
+            onClick={onClick}
             theme="dark"
-            defaultSelectedKeys={["1"]}
+            selectedKeys={[route]}
             mode="inline"
             items={items}
           />
@@ -37,7 +57,7 @@ const AppLayout = () => {
       )}
 
       <Layout>
-        {isAuthenticate && (
+        { auth!==null&& (
           <Header
             style={{
               padding: 0,
@@ -50,7 +70,7 @@ const AppLayout = () => {
             margin: "0 16px",
           }}
         >
-          {isAuthenticate && (
+          {auth!==null&& (
             <Breadcrumb
               style={{
                 margin: "16px 0",

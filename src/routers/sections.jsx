@@ -5,24 +5,30 @@ import NotFoundPage from "../pages/NotFound";
 import { AuthProvider } from "../context/AuthContext";
 import AppLayout from "../layouts/AppLayout";
 import DashBoard from "../pages/DashBoard";
-
+import Users from "../pages/Users"
 const router = createBrowserRouter([
   {
     element: (
-      <AuthProvider>
+      <AuthProvider >
         <AppLayout />
       </AuthProvider>
     ),
     children: [
       {
-        path: "/",
+        index:true,
+        path: "/dashboard",
+        element:<DashBoard/>
       },
       {
         path: "/home",
       },
       {
         path: "/dashboard",
-        element: <DashBoard />,
+        element: <DashBoard  />,
+      },
+      {
+        path:"/users",
+        element:<Users/>
       },
       {
         path: "/login",

@@ -10,7 +10,6 @@ const LoginPage = () => {
 
   const { login, isLoading } = useLogin();
   const { setIsAuthenticate } = useAuth();
-
   const navigate = useNavigate();
 
   function onFinish(values) {
@@ -23,7 +22,10 @@ const LoginPage = () => {
       {
         onSuccess: () => {
           setIsAuthenticate(true);
+
+          console.log("test")
           navigate("/dashboard");
+          
         },
         onError: (error) => {
           setError(error.message);
