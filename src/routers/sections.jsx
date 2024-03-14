@@ -5,6 +5,7 @@ import NotFoundPage from "../pages/NotFound";
 import { AuthProvider } from "../context/AuthContext";
 import AppLayout from "../layouts/AppLayout";
 import DashBoard from "../pages/DashBoard";
+import Streams from "../pages/Streams";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashBoard />,
+      },
+      {
+        path: "/live-streams",
+        element: <Streams />,
       },
       {
         path: "/login",

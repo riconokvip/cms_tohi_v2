@@ -9,6 +9,10 @@ function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setIsAuthenticate(true);
+      navigate("/dashboard");
+    }
     if (!isAuthenticate) {
       navigate("/login");
     }
