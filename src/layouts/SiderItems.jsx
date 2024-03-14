@@ -1,24 +1,22 @@
 import {
   ApartmentOutlined,
+  ApiOutlined,
   AuditOutlined,
   BankOutlined,
   CalendarOutlined,
   ClusterOutlined,
-  DesktopOutlined,
   DiscordOutlined,
   DropboxOutlined,
-  FileOutlined,
   FileProtectOutlined,
   FlagOutlined,
   GiftOutlined,
   MailOutlined,
   MessageOutlined,
   PayCircleOutlined,
-  PieChartOutlined,
-  PoundOutlined,
-  ProfileOutlined,
-  SketchOutlined,
-  TeamOutlined,
+  PropertySafetyOutlined,
+  RobotOutlined,
+  RocketOutlined,
+  ToolOutlined,
   TransactionOutlined,
   UnorderedListOutlined,
   UserOutlined,
@@ -51,6 +49,7 @@ function getItem(label, key, icon, children) {
 const structure = [
   {
     label: "QUẢN LÝ NGƯỜI DÙNG",
+    icon: <UserOutlined />,
     key: "user_group",
     children: [
       { label: "Người dùng", key: "user", icon: <UserOutlined /> },
@@ -73,6 +72,7 @@ const structure = [
   },
   {
     label: "QUẢN LÝ MẠNG LƯỚI",
+    icon: <ApiOutlined />,
     key: "network_group",
     children: [
       { label: "Loại mạng lưới", key: "networks", icon: <ApartmentOutlined /> },
@@ -90,6 +90,7 @@ const structure = [
   },
   {
     label: "QUẢN LÝ GIAO DỊCH",
+    icon: <PropertySafetyOutlined />,
     key: "transaction_group",
     children: [
       {
@@ -112,6 +113,7 @@ const structure = [
   },
   {
     label: "QUẢN LÝ QUÀ TẶNG",
+    icon: <RocketOutlined />,
     key: "gift_group",
     children: [
       { label: "Quà tặng", key: "gifts", icon: <GiftOutlined /> },
@@ -120,6 +122,7 @@ const structure = [
   },
   {
     label: "QUẢN LÝ TRÒ CHƠI",
+    icon: <RobotOutlined />,
     key: "game_group",
     children: [
       { label: "Trò chơi", key: "games", icon: <DiscordOutlined /> },
@@ -128,6 +131,7 @@ const structure = [
   },
   {
     label: "QUẢN LÝ CHUNG",
+    icon: <ToolOutlined />,
     key: "general_group",
     children: [
       {

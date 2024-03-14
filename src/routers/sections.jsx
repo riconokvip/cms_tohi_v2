@@ -6,12 +6,15 @@ import { AuthProvider } from "../context/AuthContext";
 import AppLayout from "../layouts/AppLayout";
 import DashBoard from "../pages/DashBoard";
 import Streams from "../pages/Streams";
+import { NotificationProvider } from "../context/NotificationContext";
 
 const router = createBrowserRouter([
   {
     element: (
       <AuthProvider>
-        <AppLayout />
+        <NotificationProvider>
+          <AppLayout />
+        </NotificationProvider>
       </AuthProvider>
     ),
     children: [
