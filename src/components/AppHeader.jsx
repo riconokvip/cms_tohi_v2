@@ -8,7 +8,7 @@ function AppHeader({ Layout }) {
 
   const { isAuthenticate } = useAuth();
   return (
-    isAuthenticate && (
+    localStorage.getItem("user") && (
       <Layout.Header
         style={{
           padding: 0,

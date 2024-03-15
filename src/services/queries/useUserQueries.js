@@ -1,32 +1,24 @@
-// import { 
-//     // useMutation, 
-//     useQuery } from "@tanstack/react-query";
-// // import apiClient from "../apiClient";
-// // import { USER_ENDPOINT_KEY } from "../endpoints";
-// import { getUsers } from "../apiUsers";
-// export const QUERY_KEY = 'User';
+import {
+  // useMutation,
+  useQuery,
+} from "@tanstack/react-query";
+import { getUserDetail, getUsers } from "../apiUsers";
+import { QUERY_KEY_USER, QUERY_KEY_USER_DETAIL } from "./queriesKeyConts";
 
 
+export const useGetUsers = (PageIndex, PageSize, keepPreviousData) => {
+  return useQuery({
+    queryKey: [QUERY_KEY_USER, PageIndex],
+    queryFn: () => getUsers(PageIndex, PageSize),
+    placeholderData: keepPreviousData,
+    staleTime:10*1000
+  });
+};
 
-// const updateUser = async (body) => {
-//     const { data } = await apiClient.put(USER_ENDPOINT_KEY, body);
-//     return data;
-// }
+export const useGetUserDetail = (userId) => {
+  return useQuery({
+    queryKey: [QUERY_KEY_USER_DETAIL, userId],
+    queryFn: () => getUserDetail(userId),
+  });
+};
 
-// export const useGetUsers = (PageIndex,PageSize) => {
-//    return useQuery({
-//         queryKey: [QUERY_KEY,PageIndex],
-//         queryFn:()=> getUsers(PageIndex,PageSize),
-//    });
-// }
-
-// export const useUpdateUser = () => {
-//     return useMutation(updateUser, {
-//         onSuccess: (data) => {
-//             // handle success
-//         },
-//         onError: (error) => {
-//             // handle error
-//         },
-//     });
-// };

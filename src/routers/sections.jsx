@@ -6,13 +6,17 @@ import { AuthProvider } from "../context/AuthContext";
 import AppLayout from "../layouts/AppLayout";
 import DashBoard from "../pages/DashBoard";
 import Streams from "../pages/Streams";
+import { NotificationProvider } from "../context/NotificationContext";
 import Users from "../pages/Users"
-import UserDetail from "../components/Users/UserDetail";
+import UserDetail from "../components/Users/UserDetail/UserDetail";
+import Events from "../pages/Events";
 const router = createBrowserRouter([
   {
     element: (
-      <AuthProvider >
-        <AppLayout />
+      <AuthProvider>
+        <NotificationProvider>
+          <AppLayout />
+        </NotificationProvider>
       </AuthProvider>
     ),
     children: [
@@ -39,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/live-streams",
         element: <Streams />,
+      },
+      {
+        path: "/events",
+        element: <Events />,
       },
       {
         path: "/login",

@@ -2,11 +2,24 @@ import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import Menu from "antd/lib/menu";
 import { items } from "../layouts/SiderItems";
-import { useNavigate } from "react-router-dom";
+import { matchRoutes, useLocation, useNavigate } from "react-router-dom";
 
 function AppSider({ Layout }) {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const { isAuthenticate } = useAuth();
+  const location = useLocation();
+  
+  const [
+    {
+      route: { path },
+    },
+  ] = matchRoutes([{ path: location.pathname }], location);
+
+  const route = `${path
+    .split("/")
+    .filter((a) => !!a)
+    .shift()}`;
+
   const navigate = useNavigate();
 
   function handleClick({ key }) {
@@ -14,8 +27,9 @@ function AppSider({ Layout }) {
       navigate(`/${key}`);
     }
   }
+
   return (
-    isAuthenticate && (
+    localStorage.getItem("user")&& (
       <Layout.Sider
         collapsible
         collapsed={collapsed}
@@ -25,7 +39,7 @@ function AppSider({ Layout }) {
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[route]}
           mode="inline"
           items={items}
           onClick={handleClick}

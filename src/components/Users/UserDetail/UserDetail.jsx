@@ -1,12 +1,13 @@
-import { Avatar, Col, Image, Row, Typography } from "antd";
+import { Avatar, Col, Image, Row, Tabs, Typography } from "antd";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Fragment, useEffect, useState } from "react";
 // import PaymentsUserDetail from "../../components/Users/UserDetail/PaymentsUserDetail";
 // import ProfileDetail from "../../components/Users/UserDetail/ProfileDetail";
 import { useNavigate, useParams } from "react-router-dom";
-import { formatCash } from "../../utils";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getUserDetail } from "../../services/apiUsers";
+import { formatCash } from "../../../utils";
+import { useGetUserDetail } from "../../../services/queries/useUserQueries";
+import UserDetail_DepositWithdrawHistory from "./UserDetail_DepositWithdrawHistory";
+import UserDetail_TransactionHistory from "./UserDetail_TransactionHistory";
 
 // import TransactionUserDetail from "../../components/Users/UserDetail/TransactionUserDetail";
 // import DepositWithdrawUserDetail from "../../components/Users/UserDetail/DepositWithdrawUserDetail";
@@ -14,20 +15,13 @@ import { getUserDetail } from "../../services/apiUsers";
 // import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 const UserDetail = () => {
-  const [activeTab, setActiveTab] = useState("transaction");
   const navigate = useNavigate();
   const [userDetail, setUserDetail] = useState([]);
   const { userId } = useParams();
-
-
-  const { data } = useQuery({
-    queryKey: ["user-detail", userId],
-    queryFn: () => getUserDetail(userId),
-  });
+  const { data } =useGetUserDetail(userId)
   useEffect(()=>{
     if(data?.data){
       setUserDetail(data?.data)
-
     }
   },[data?.data])
   return (
@@ -36,24 +30,25 @@ const UserDetail = () => {
         <Typography.Title level={4} className="m-0 ml-2 hover:cursor-default">
           <span
             onClick={() => {
-              navigate(`/users`);
+              navigate(-1);
             }}
-            className=" text-[#ff3535]  hover:underline hover:text-red-400 duration-150 cursor-pointer"
+            className="cursor-pointer"
           >
             Người dùng
           </span>
-          <span className="text-gray-400 "> / </span>
-          <span className="text-[#ff0505] underline"> Chi tiết người dùng</span>
+          <span > / </span>
+          <span >Chi tiết người dùng</span>
         </Typography.Title>
       </Row>
       
-      <Col span={24} className="flex">
+      <Row gutter={[50]}>
         <Col span={7}>
           <Row
+            gutter={[5,5]}
             className="bg-white max-h-[350px] rounded-[6px] "
             style={{ boxShadow: "rgba(47, 43, 61, 0.14) 0px 2px 6px 0px" }}
           >
-            <Col span={9} className="p-[10px]">
+            <Col span={9}  className="mt-3">
               <Row className="w-full h-full">
                 {userDetail?.avatar !== "" &&
                 userDetail?.avatar !== null &&
@@ -68,7 +63,7 @@ const UserDetail = () => {
                   />
                 ) : (
                   <div className="flex items-center justify-center w-full h-ful">
-                    <Avatar size={100} icon={<UserOutlined/>}/>
+                    <Avatar size={120} icon={<UserOutlined/>}/>
                   </div>
                 )}
               </Row>
@@ -145,65 +140,38 @@ const UserDetail = () => {
             {/* <ProfileDetail userDetail={userDetail} /> */}
           </Row>
         </Col>
-        <Col span={16} offset={1}>
-          <Row
-            style={{ borderTopRightRadius: "6px", borderTopLeftRadius: "6px" }}
-            className="bg-white "
-          >
-            <NavAction
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
-          </Row>
+        <Col span={16} >
+            <NavAction />
           {/* {activeTab === "depositandwithdraw" && <DepositWithdrawUserDetail />} */}
           {/* {activeTab === "transaction" && <TransactionUserDetail />} */}
           {/* {activeTab === "bank" && <PaymentsUserDetail />} */}
         </Col>
-      </Col>
+      </Row>
     </Fragment>
   );
 };
 
 export default UserDetail;
 
-const NavAction = ({ activeTab, setActiveTab}) => {
+const NavAction = () => {
 
-  const data = [
-    { value: "depositandwithdraw", label: "Lịch sử nạp rút " },
-    { value: "transaction", label: "Lịch sử giao dịch" },
+  const items = [
+    { 
+      key: "depositandwithdraw",
+      label: "Lịch sử nạp rút",
+      children: <UserDetail_DepositWithdrawHistory/>
+    },
+    { 
+      key: "transaction",
+      label: "Lịch sử giao dịch" ,
+      children:<UserDetail_TransactionHistory/>
+
+    },
   ];
-  return (
-    <>
-      <ul className="tabs-nav flex items-stretch pl-0  m-0">
-        {data.map((i, index) => {
-          return (
-            <li
-              key={index}
-              className={`description_tab list-none ml-6 flex items-stretch  `}
-            >
-              <div
-                className={`
-                label-tab
-                cursor-pointer
-                ${activeTab === i.value ? "text-red-600  " : ""} 
-                text-[16px]
-                pb-3 
-                pt-4
-                `}
-                style={{
-                  borderBottom:
-                    activeTab === i.value ? "2px solid #ff352e" : "",
-                }}
-                onClick={() => {
-                  handleTabClick(i.value);
-                }}
-              >
-                {i.label}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-    </>
-  );
+  return  (
+    <Row className="bg-white rounded-[6px]">
+       <Tabs items={items}  />
+    </Row>
+    )
+
 };

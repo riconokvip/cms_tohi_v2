@@ -7,7 +7,7 @@ function AppContent({ Layout }) {
 
   return (
     <Layout.Content style={{ margin: "0 16px" }}>
-      {isAuthenticate && (
+      {localStorage.getItem("user") && (
         <Breadcrumb
           style={{ margin: "16px 0" }}
           items={[{ title: "User" }, { title: "Bill" }]}

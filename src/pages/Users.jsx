@@ -1,18 +1,13 @@
-import { Col, Row, Table, Typography } from "antd";
-import { columnsUsers } from "../components/Users/Columns";
+import { Col, Row, Typography } from "antd";
+import RecordsTable from "../components/Table";
 import { useState } from "react";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getUsers } from "../services/apiUsers";
+import { useGetUsers } from "../services/queries/useUserQueries";
+import { keepPreviousData } from "@tanstack/react-query";
+import {columnsUsers} from "../components/Users/Columns"
 const Users = () => {
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["user", page],
-    queryFn: () => getUsers(page, pageSize),
-    placeholderData: keepPreviousData,
-  });
-  const totalLength = data?.total;
+  const [page,setPage]=useState(0)
+  const [pageSize,setPageSize]=useState(10)
+  const {data,isLoading}=useGetUsers(page,pageSize,keepPreviousData)
   return (
     <Col span={24}>
       <Row>
@@ -22,24 +17,12 @@ const Users = () => {
           </Row>
         </Col>
         <Col span={24}>
-          <Table
-            bordered
+          <RecordsTable
+            data={data}
             columns={columnsUsers}
-            loading={isLoading}
-            dataSource={data?.data || []}
-            pagination={{
-              showSizeChanger: false,
-              className: "record__pagination",
-              size: "default",
-              total: totalLength,
-              pageSize: pageSize,
-              current: page + 1 || 1,
-              position: "center",
-              onChange: (page, pageSize) => {
-                setPage(page - 1);
-                setPageSize(pageSize);
-              },
-            }}
+            isLoading={isLoading}
+            setPageSize={setPageSize}
+            setPage={setPage}
           />
         </Col>
       </Row>

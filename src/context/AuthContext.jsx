@@ -10,11 +10,11 @@ function AuthProvider({ children }) {
   console.log("isAuthenticate",isAuthenticate)
   const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setIsAuthenticate(true);
-      navigate("/dashboard");
-    }
-    if (!isAuthenticate) {
+    // if (localStorage.getItem("user")) {
+    //   setIsAuthenticate(true);
+    //   navigate("/dashboard");
+    // }
+    if (!isAuthenticate &&!localStorage.getItem("user")) {
       navigate("/login");
     }
   }, [isAuthenticate, navigate]);
