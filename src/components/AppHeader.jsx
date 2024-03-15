@@ -12,9 +12,12 @@ function AppHeader({ Layout }) {
       <Layout.Header
         style={{
           padding: 0,
+          paddingLeft: 10,
           background: colorBgContainer,
         }}
-      />
+      >
+        Top Search Bar and User Logout
+      </Layout.Header>
     )
   );
 }

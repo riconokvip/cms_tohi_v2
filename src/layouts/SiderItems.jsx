@@ -78,7 +78,7 @@ const structure = [
       { label: "Loại mạng lưới", key: "networks", icon: <ApartmentOutlined /> },
       {
         label: "Yêu cầu tạo mạng lưới",
-        key: "request-create-network",
+        key: "request-network",
         icon: <ClusterOutlined />,
       },
       {
@@ -95,12 +95,12 @@ const structure = [
     children: [
       {
         label: "Giao dịch tặng quà",
-        key: "transaction-donations",
+        key: "donations",
         icon: <PayCircleOutlined />,
       },
       {
         label: "Giao dịch nạp rút",
-        key: "transaction-admin",
+        key: "transactions",
         icon: <TransactionOutlined />,
       },
       { label: "Ngân hàng", key: "banks", icon: <BankOutlined /> },
@@ -136,7 +136,7 @@ const structure = [
     children: [
       {
         label: "Tin nhắn hệ thống",
-        key: "system-messages",
+        key: "messages",
         icon: <MessageOutlined />,
       },
       { label: "Chính sách", key: "policies", icon: <FileProtectOutlined /> },
