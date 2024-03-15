@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [isAuthenticate, setIsAuthenticate] = useState(false);
+  const [isAuthenticate, setIsAuthenticate] = useState(
+    localStorage.getItem("user") !== null
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
