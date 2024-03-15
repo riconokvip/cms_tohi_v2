@@ -46,7 +46,7 @@ function getItem(label, key, icon, children) {
   return row;
 }
 
-const structure = [
+export const structure = [
   {
     label: "QUẢN LÝ NGƯỜI DÙNG",
     icon: <UserOutlined />,

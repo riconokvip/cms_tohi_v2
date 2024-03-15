@@ -1,5 +1,6 @@
 import { useAuth } from "../context/AuthContext";
 import theme from "antd/lib/theme";
+import TopSearchBar from "./TopSearchBar";
 
 function AppHeader({ Layout }) {
   const {
@@ -16,7 +17,7 @@ function AppHeader({ Layout }) {
           background: colorBgContainer,
         }}
       >
-        Top Search Bar and User Logout
+        <TopSearchBar />
       </Layout.Header>
     )
   );

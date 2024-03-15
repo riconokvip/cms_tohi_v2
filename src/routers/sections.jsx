@@ -49,6 +49,7 @@ const router = createBrowserRouter([
       { path: "/banks", element: <Banks /> },
       { path: "/diamonds-package", element: <DiamondsPackage /> },
       { path: "/gifts", element: <Gifts /> },
+      { path: "/gift-types", element: <GiftTypes /> },
       { path: "/games", element: <Games /> },
       { path: "/game-types", element: <GameTypes /> },
       { path: "/messages", element: <Messages /> },
