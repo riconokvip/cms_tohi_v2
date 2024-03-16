@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import { login as loginApi } from "../../services/apiLogin";
-import { useNavigate } from "react-router-dom";
 
 export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
