@@ -53,8 +53,8 @@ export const APIClient = {
   post: async (path, data) => {
     return await baseAxios.post(path, data);
   },
-  put: async (path, data) => {
-    return await baseAxios.put(path, data);
+  put: async (path, data,config) => {
+    return await baseAxios.put(path, data,config);
   },
   patch: async (path, data, config) => {
     return await baseAxios.patch(path, data, config);

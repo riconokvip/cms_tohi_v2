@@ -1,4 +1,4 @@
-import { Col, Row, Typography } from "antd";
+import { Breadcrumb, Col, Row, Typography } from "antd";
 import RecordsTable from "../components/Table";
 import { useState } from "react";
 import { useGetUsers } from "../services/queries/useUserQueries";
@@ -13,7 +13,10 @@ const Users = () => {
       <Row>
         <Col span={24}>
           <Row className="">
-            <Typography.Title level={2}>Nguời dùng</Typography.Title>
+          <Breadcrumb
+            style={{ margin: "16px 0" }}
+            items={[{ title: <Typography.Title style={{marginBottom:0}} level={4}>Người dùng</Typography.Title> }]}
+         />
           </Row>
         </Col>
         <Col span={24}>

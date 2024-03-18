@@ -1,7 +1,7 @@
-import { Button, Modal as AntModal, Input } from "antd";
+import { Button, Modal as AntModal } from "antd";
 import { useEffect, useState } from "react";
 
-function Modal({ button, data, render, isOpen, onChange, title }) {
+function Modal({ button, data, render, isOpen, onChange, title ,form}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function Modal({ button, data, render, isOpen, onChange, title }) {
   };
   return (
     <>
-      <Button onClick={showModal} {...button?.props}>
+      <Button style={button.props.style} type="primary" onClick={showModal} {...button?.props}>
         {button?.title || "Open Modal"}
       </Button>
       <AntModal
@@ -30,10 +30,11 @@ function Modal({ button, data, render, isOpen, onChange, title }) {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={<></>}
         okButtonProps={{ type: "primary", ghost: true }}
         cancelButtonProps={{ danger: true }}
       >
-        {data && data.map(render)}
+        {data ? data.map(render) : form}
       </AntModal>
     </>
   );

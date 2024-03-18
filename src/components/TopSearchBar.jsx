@@ -10,15 +10,6 @@ function TopSearchBar() {
   const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
-  const button = {
-    props: {
-      icon: <SearchOutlined />,
-      type: "text",
-      size: "large",
-    },
-    title: "Search...",
-  };
-
   function handleChange(value) {
     setIsOpen(value);
   }
@@ -48,9 +39,17 @@ function TopSearchBar() {
           placeholder="Search..."
           variant="borderless"
           onChange={(evt) => setFilter(evt.target.value)}
-        />
+          />
       }
-      button={button}
+      button={{
+        props: {
+          icon: <SearchOutlined />,
+          type: "text",
+          size: "large",
+          className:"bg-transparent"
+        },
+        title: "Search...",
+      }}
       data={data}
       isOpen={isOpen}
       onChange={handleChange}

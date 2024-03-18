@@ -9,3 +9,13 @@ export const errorGlobal = atom({
   key: "errorGlobal",
   default: "",
 });
+
+
+export const typeEventState=atom({
+  key:"typeEventState",
+  default:{
+    open:false,
+    event:"",
+    data:{}
+  }
+})

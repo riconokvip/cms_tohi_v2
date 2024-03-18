@@ -8,7 +8,15 @@ export async function login({ userName, password }) {
     });
 
     return data;
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error("login", error.message);
+  }
+}
+
+export async function refreshToken({ userName, password }) {
+  try {
+    //TODO: refresh token logic
+  } catch (error) {
+    console.error("login", error.message);
   }
 }

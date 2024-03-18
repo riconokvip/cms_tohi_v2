@@ -99,7 +99,7 @@ export const columnsUsers= [
       key:"isStreaming",
       dataIndex: "isStreaming",
       title: "Trạng thái live",
-      width: 80,
+      width: 100,
       align: "center",
       sorter: (a, b) => a?.isStreaming - b?.isStreaming,
       render: (isStreaming) => {

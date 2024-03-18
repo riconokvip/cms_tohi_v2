@@ -1,15 +1,37 @@
 import { useMutation } from "@tanstack/react-query";
-import { addEvent as addEventApi } from "../../services/apiEvents";
+import { addEvent as addEventApi, deleteEvent, editEvent } from "../../services/apiEvents";
 
 export function useAddEvent() {
-  const { mutate, isLoading } = useMutation({
+  return useMutation({
     mutationFn: (body) => addEventApi(body),
-    onSuccess: (res) => {
-      console.log("res",res)
+    onSuccess: (data) => {
+      console.log("res",data)
 
     //   if (res?.isError) throw new Error(res.message);
     },
   });
 
-  return { login, isLoading };
+}
+
+export function useEditEvent(id) {
+  return useMutation({
+    mutationFn: (body) => editEvent(id,body),
+    onSuccess: (data) => {
+      console.log("res",data)
+
+    //   if (res?.isError) throw new Error(res.message);
+    },
+  });
+
+}
+
+export function useDeleteEvent(){
+  return useMutation({
+    mutationFn: (id) => deleteEvent(id),
+    onSuccess: (data) => {
+      console.log("res",data)
+
+    //   if (res?.isError) throw new Error(res.message);
+    },
+  });
 }

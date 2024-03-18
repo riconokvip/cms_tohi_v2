@@ -8,6 +8,7 @@ const RecordsTable = ({data,isLoading,columns,setPage,setPageSize,...props}) => 
   return (
     <Fragment>
       <Table
+            rowKey={"id"}
             bordered
             columns={columns}
             loading={isLoading}
@@ -19,12 +20,12 @@ const RecordsTable = ({data,isLoading,columns,setPage,setPageSize,...props}) => 
               total:totalLength,
               pageSize: pageSize,
               current: page + 1 || 1,
-              position: "center",
               onChange: (page, pageSize) => {
                 setPage(page - 1);
                 setPageSize(pageSize);
               },
             }}
+            {...props}
           />
     </Fragment>
   )
